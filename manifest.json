@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "MessengerGameDestroyer",
   "description": "Deletes facebook messenger messages related to games",
-  "version": "0.3",
+  "version": "0.3.1",
   "permissions": [
     "activeTab"
   ],

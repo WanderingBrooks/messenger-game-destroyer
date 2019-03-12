@@ -1,4 +1,15 @@
+let messengerDestroyerDisplay = 'none';
+
+// Listener for the backend sending a request
+chrome.runtime.onMessage.addListener(() => {
+  messengerDestroyerDisplay = 
+    messengerDestroyerDisplay === 'none'
+      ? 'block'
+      : 'none';
+});
+
 const deleteThis = () => {
+  let detected = 0;
   document.querySelectorAll('a[href="#"]').forEach(el => {
     if ( el.innerText === 'Play' || el.innerText === 'Play Now' ) {
       const gameMessage = el
@@ -14,9 +25,10 @@ const deleteThis = () => {
         .parentElement;
  
       if ( gameMessage.parentElement.childElementCount > 2 ) {
-        gameMessage.parentElement.removeChild( gameMessage );
+        gameMessage.style.display = messengerDestroyerDisplay;
+        detected++;
       } else {
-        // Previous sibiling is exists and is an H4 tag
+        // Previous sibiling exists and is an H4 tag
         const prevSibiling = (
           messageChain.parentElement.previousSibling &&
           messageChain.parentElement.previousSibling.tagName === 'H4'
@@ -29,16 +41,16 @@ const deleteThis = () => {
         );
 
         if ( prevSibiling && nextSibiling ) {
-          messageChain
-          .parentElement
-          .parentNode
-          .removeChild( messageChain.parentElement.previousSibling );
+          // Hide the time
+          messageChain.parentElement.previousSibling.style.display = messengerDestroyerDisplay;
         }
 
-        messageChain.parentElement.removeChild( messageChain );
+        messageChain.style.display = messengerDestroyerDisplay;
+        detected++;
       }
     }
  });
+ chrome.runtime.sendMessage({ detected });
 }
 
 setInterval( deleteThis, 100 );

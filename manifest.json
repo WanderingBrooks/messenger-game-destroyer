@@ -2,10 +2,13 @@
   "manifest_version": 2,
   "name": "MessengerGameDestroyer",
   "description": "Deletes facebook messenger messages related to games",
-  "version": "0.2.1",
+  "version": "0.3",
   "permissions": [
     "activeTab"
   ],
+  "page_action": {
+    "default_title": "Messenger Game Destroyer"
+  },
   "content_scripts": [
     {
       "matches": [
@@ -14,5 +17,9 @@
       ],
       "js": ["src/delete-this.js"]
     }
-  ]
+  ],
+  "background": {
+    "scripts": ["src/the-toggler.js"],
+    "persistent": false
+  }
 }

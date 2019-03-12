@@ -2,12 +2,12 @@
   "manifest_version": 2,
   "name": "MessengerGameDestroyer",
   "description": "Deletes facebook messenger messages related to games",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "permissions": [
     "activeTab"
   ],
   "page_action": {
-    "default_title": "Messenger Game Destroyer"
+    "default_title": "Click to toggle hiding games"
   },
   "content_scripts": [
     {
